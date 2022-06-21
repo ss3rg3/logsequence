@@ -1,6 +1,6 @@
 # Understanding LogSequence
 
-LogSequence allows you test sequences of logs. You provide a list of string (e.g. from a custom log appender) and define a sequence of strings you expect. 
+LogSequence allows you test sequences of logs. You provide a list of strings (e.g. from a custom log appender) and define a sequence of strings you expect. 
 
 ```java
 // YOUR LOGS
@@ -34,9 +34,7 @@ LogSequence.anyOrder(logAppenderList) // Can be in ANY order
 
 # Logback Appender
 
-- Create a simple appender
-
-- Note that the logs are a simple `public static List<String>`, so you can access them via `LogSequenceAppender.logs`
+- Create a simple appender. Note that the logs are a simple `public static List<String>`, so you can access them via `LogSequenceAppender.logs`
 
   ```java
   public class LogSequenceAppender extends AppenderBase<ILoggingEvent> {
