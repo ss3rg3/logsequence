@@ -47,9 +47,9 @@ public class LogbackTest {
     @Test
     void anyOrder() {
         LogSequence.anyOrder(LogSequenceAppender.logs)
+                .rgx("Process.*finished")
                 .str("Client 1 connected")
                 .str("Client 2 connected")
-                .rgx("Process.*finished")
                 .debug()
                 .validate();
 

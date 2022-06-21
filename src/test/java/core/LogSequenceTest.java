@@ -39,9 +39,9 @@ class LogSequenceTest {
     @Test
     void anyOrder() {
         LogSequence.anyOrder(logAppenderList)
+                .rgx("Process.*finished")
                 .str("Client 1 connected")
                 .str("Client 2 connected")
-                .rgx("Process.*finished")
                 .debug()
                 .validate();
 
