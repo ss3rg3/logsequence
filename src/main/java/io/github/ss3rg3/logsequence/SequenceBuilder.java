@@ -1,4 +1,4 @@
-package io.github.ss3rg3.core;
+package io.github.ss3rg3.logsequence;
 
 import java.util.ArrayList;
 import java.util.Collections;

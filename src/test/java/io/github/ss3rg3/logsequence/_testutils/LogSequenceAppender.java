@@ -1,4 +1,4 @@
-package io.github.ss3rg3._testutils;
+package io.github.ss3rg3.logsequence._testutils;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;

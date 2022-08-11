@@ -1,6 +1,6 @@
-package io.github.ss3rg3.core;
+package io.github.ss3rg3.logsequence;
 
-import io.github.ss3rg3._testutils.LogSequenceAppender;
+import io.github.ss3rg3.logsequence._testutils.LogSequenceAppender;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,5 @@
-package io.github.ss3rg3.core;
+package io.github.ss3rg3.logsequence;
 
-import io.github.ss3rg3.core.LogSequence;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
