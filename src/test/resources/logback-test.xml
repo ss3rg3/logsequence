@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <appender name="LOG_SEQUENCE" class="_testutils.LogSequenceAppender" />
+    <appender name="LOG_SEQUENCE" class="io.github.ss3rg3._testutils.LogSequenceAppender" />
 
     <root level="debug">
         <appender-ref ref="STDOUT" />

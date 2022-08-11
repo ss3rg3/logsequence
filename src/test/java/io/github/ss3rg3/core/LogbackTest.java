@@ -1,25 +1,33 @@
-package core;
+package io.github.ss3rg3.core;
 
+import io.github.ss3rg3._testutils.LogSequenceAppender;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.List;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class LogSequenceTest {
+public class LogbackTest {
 
-    private final List<String> logAppenderList = Arrays.asList(
-            "INFO - Engine initialized",
-            "INFO - Client 2 connected",
-            "INFO - Client 1 connected",
-            "INFO - Processing started",
-            "INFO - Processing finished"
-    );
+    /**
+     * See logback-test.xml for configuration
+     */
+    private static final Logger logger = LoggerFactory.getLogger(LogbackTest.class);
+
+    static {
+        logger.debug("Engine started");
+        logger.debug("Client {} connected", 1);
+        logger.debug("Client {} connected", 2);
+        logger.debug("Processing started");
+        logger.info("Processing finished");
+    }
 
     @Test
     void exactOrder() {
-        LogSequence.exactOrder(this.logAppenderList)
+        assertEquals(5, LogSequenceAppender.logs.size());
+
+        LogSequence.exactOrder(LogSequenceAppender.logs)
                 .rgx("Client \\d connected")
                 .rgx("Client \\d connected")
                 .str("Processing finished")
@@ -27,7 +35,7 @@ class LogSequenceTest {
                 .validate();
 
         assertThrows(IllegalStateException.class, () ->
-                LogSequence.exactOrder(this.logAppenderList)
+                LogSequence.exactOrder(LogSequenceAppender.logs)
                         .rgx("Client \\d connected")
                         .rgx("Client \\d connected")
                         .rgx("Client \\d connected") // Does not occur in subsequent log lines
@@ -39,7 +47,7 @@ class LogSequenceTest {
 
     @Test
     void anyOrder() {
-        LogSequence.anyOrder(this.logAppenderList)
+        LogSequence.anyOrder(LogSequenceAppender.logs)
                 .rgx("Process.*finished")
                 .str("Client 1 connected")
                 .str("Client 2 connected")
@@ -47,7 +55,7 @@ class LogSequenceTest {
                 .validate();
 
         assertThrows(IllegalStateException.class, () ->
-                LogSequence.anyOrder(this.logAppenderList)
+                LogSequence.anyOrder(LogSequenceAppender.logs)
                         .str("Client 1 connected")
                         .str("Client 2 connected")
                         .str("Client 2 connected")  // Previous test matched and log line was removed, therefore duplicate is not found

@@ -1,4 +1,4 @@
-package core;
+package io.github.ss3rg3.core;
 
 import java.util.regex.Pattern;
 

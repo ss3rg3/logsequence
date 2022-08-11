@@ -1,4 +1,4 @@
-package core;
+package io.github.ss3rg3.core;
 
 public interface LogTest {
 
