@@ -63,11 +63,11 @@ public class SequenceBuilder {
         List<MatchTuple> successfulMatches = new ArrayList<>();
         List<LogTest> failedTests = new ArrayList<>();
 
-        for (LogTest test : logTests) {
+        for (LogTest test : this.logTests) {
             boolean isSuccess = false;
 
             int currentIndex = 0;
-            for (String line : logLines) {
+            for (String line : this.logLines) {
                 if (test.doesMatch(line)) {
                     successfulMatches.add(new MatchTuple(line, test));
                     isSuccess = true;
@@ -77,18 +77,24 @@ public class SequenceBuilder {
             }
 
             if (isSuccess) {
-                logLines.remove(currentIndex);
+                this.logLines.remove(currentIndex);
             } else {
                 failedTests.add(test);
             }
         }
 
+        boolean debugHasBeenPrinted = false;
         if (this.isDebug) {
             this.printSuccessfulMatches(successfulMatches);
             this.printFailedTests(failedTests);
+            debugHasBeenPrinted = true;
         }
 
         if (successfulMatches.size() < this.logTests.size()) {
+            if (!debugHasBeenPrinted) {
+                this.printSuccessfulMatches(successfulMatches);
+                this.printFailedTests(failedTests);
+            }
             throw new IllegalStateException("Failed to find all desired lines " +
                     "(found " + successfulMatches.size() + " out of " + this.logTests.size() + ")");
         }
@@ -116,11 +122,16 @@ public class SequenceBuilder {
             }
         }
 
+        boolean debugHasBeenPrinted = false;
         if (this.isDebug) {
             this.printSuccessfulMatches(successfulMatches);
+            debugHasBeenPrinted = true;
         }
 
         if (successfulMatches.size() < this.logTests.size()) {
+            if (!debugHasBeenPrinted) {
+                this.printSuccessfulMatches(successfulMatches);
+            }
             throw new IllegalStateException("Failed to find all desired lines " +
                     "(found " + successfulMatches.size() + " out of " + this.logTests.size() + "), " +
                     "need:\n" + this.logTests.get(currentIndex));
@@ -152,7 +163,7 @@ public class SequenceBuilder {
             System.out.println("   NONE");
         }
         for (LogTest test : failedTests) {
-            System.out.println("   "+test);
+            System.out.println("   " + test);
         }
         System.out.println();
     }
