@@ -42,6 +42,10 @@ public class TestAction {
 
     }
 
+    public static TestAction create(String description, Function<TestActionBuilder, TestActionBuilder> functionalBuilder) {
+        return new TestAction(description, functionalBuilder);
+    }
+
     public static class TestActionBuilder {
         private TestActionBuilder() {
         }
