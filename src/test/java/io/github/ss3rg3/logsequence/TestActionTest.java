@@ -23,13 +23,13 @@ class TestActionTest {
     }
 
     @Test
-    void to() {
-        TestAction.create("Manual test which won't fail", _0 -> _0
-                .run(() ->
+    void execute() {
+        TestAction.execute("Manual test which won't fail", _0 -> _0
+                .run("Some named run", () ->
                         System.out.println("Running some stuff"))
-                .test(() ->
+                .test("Some named test", () ->
                         System.out.println("Testing again..."))
-                .sleep(100, "Doing some sleep")
+                .sleep(100)
                 .run(() ->
                         System.out.println("Running some more stuff"))
                 .sleep(100, "Doing more sleep")
