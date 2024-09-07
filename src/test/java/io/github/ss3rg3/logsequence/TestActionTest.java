@@ -33,6 +33,8 @@ class TestActionTest {
                 .run("Some other named run", () ->
                         System.out.println("Running some more stuff"))
                 .sleep(100, "Doing more sleep")
+                .run(() ->
+                        System.out.println("Running some more stuff with name"))
                 .test(() ->
                         System.out.println("Testing again..."))
         );

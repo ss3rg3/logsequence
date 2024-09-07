@@ -22,10 +22,9 @@ public class TestAction {
             Action action = this.actions.poll();
             action.runnable.run();
 
-            String message = action.message == null ? "" : " " + action.message;
             switch (action.type) {
                 case RUN:
-                    System.out.println("├── Run ───────" + message);
+                    System.out.println("├── Run" + (action.message == null ? "" : " ─────── " + action.message));
                     break;
 
                 case SLEEP:
@@ -33,7 +32,7 @@ public class TestAction {
                     break;
 
                 case TEST:
-                    System.out.println("├── Tests ─────" + message);
+                    System.out.println("├── Tests" + (action.message == null ? "" : " ───── " + action.message));
                     break;
 
                 default:
