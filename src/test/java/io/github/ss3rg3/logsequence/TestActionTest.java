@@ -30,7 +30,7 @@ class TestActionTest {
                 .test("Some named test", () ->
                         System.out.println("Testing again..."))
                 .sleep(100)
-                .run(() ->
+                .run("Some other named run", () ->
                         System.out.println("Running some more stuff"))
                 .sleep(100, "Doing more sleep")
                 .test(() ->

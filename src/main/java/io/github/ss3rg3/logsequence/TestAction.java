@@ -17,15 +17,15 @@ public class TestAction {
         this.actions = builder.actions;
 
         System.out.println("┌──────────────────────────────────────────────────");
-        System.out.println("├── TEST_ACTION   (" + description + ")");
+        System.out.println("├── " + description);
         while (!this.actions.isEmpty()) {
             Action action = this.actions.poll();
             action.runnable.run();
 
-            String message = action.message == null ? "" : " (" + action.message + ")";
+            String message = action.message == null ? "" : " " + action.message;
             switch (action.type) {
                 case RUN:
-                    System.out.println("├── Run          " + message);
+                    System.out.println("├── Run ───────" + message);
                     break;
 
                 case SLEEP:
@@ -33,7 +33,7 @@ public class TestAction {
                     break;
 
                 case TEST:
-                    System.out.println("├── Tests        " + message);
+                    System.out.println("├── Tests ─────" + message);
                     break;
 
                 default:
@@ -67,7 +67,7 @@ public class TestAction {
         public TestActionBuilder sleep(int durationInMs, String message) {
             this.actions.add(new Action(ActionType.SLEEP, () -> {
                 try {
-                    System.out.println(INDENT + "├── Sleep ──┐     " + (message == null ? "" : " (" + message + ")"));
+                    System.out.println(INDENT + "├── Sleep ──┬──" + (message == null ? "" : " " + message));
                     Thread.sleep(durationInMs);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
